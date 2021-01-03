@@ -1,18 +1,18 @@
-import express from 'express';
 import path from 'path';
+import http from 'http';
+import express from 'express';
 
 const app = express();
 
-const dir = path.resolve(`${__dirname}\\..\\public\\index.html`);
+const server = http.createServer(app);
 
 app.get('/', (req, res) => {
+  const dir = path.resolve(`${__dirname}\\..\\public\\index.html`);
   res.sendFile(dir);
 });
 
 app.get('/api', (req, res) => {
   res.send({ test: 'data' });
-})
-
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
 });
+
+server.listen(3000);
